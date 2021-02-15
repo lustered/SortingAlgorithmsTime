@@ -1,2 +1,2 @@
 #!/bin/bash
-g++ ./sortingDriver.cpp && ./a.out
+g++ ./sortingDriver.cpp && ./a.out 
