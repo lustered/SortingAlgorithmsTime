@@ -1,2 +1,2 @@
 #!/bin/bash
-g++ -Wall ./test.cpp && ./a.out 
+g++ ./sortsImplementation.cpp && ./a.out 
