@@ -1,4 +1,3 @@
-#include <cstdlib>
 #include <iostream>
 #include <string>
 #include <fstream>
@@ -21,15 +20,16 @@ int main(){
 
 void generateDatasets(){
     /* create chunk */
-    std::string chunk = "";
     srand(777);
 
-    for (size_t i = 0; i < 10; i++) {
+    for (size_t i = 0; i < chunkslen; i++) {
 
-        for (size_t j = 0; j < CHUNKSIZE[i]; j++) 
-            chunk +=  std::to_string(rand() % 1000000) + "," + "\n"; 
+        std::string chunk = "";
 
-        /* Write chunks to file */
+        for (int j = 0; j < CHUNKSIZE[i]; j++) 
+            chunk +=  std::to_string(rand() % 1000000) + ","; 
+
+        /* Write chunk to file */
         std::ofstream outfile(std::to_string(CHUNKSIZE[i]) + "_dataset.txt");
         outfile << chunk;
         outfile.close();
@@ -39,41 +39,52 @@ void generateDatasets(){
 }
 
 void createArraysFromDatasets(){
-    
+   
+    /* Create a vector of arrays pointers */
     std::vector<int*> uns_arrays = std::vector<int*>();
-
-    /* Populate vector with arrays on the heap. Arrays in RAM will
-     * overflow. */
-    for (size_t i = 0; i < chunkslen; ++i) {
+    uns_arrays.reserve(10);
+    
+     /* Populate vector with arrays */
+    for (size_t i = 0; i < chunkslen; ++i)
         uns_arrays.push_back(new int[CHUNKSIZE[i]]);
-    }
 
-    for (size_t i = 0; i < chunkslen-1; ++i) {
+    /* **************************************** */
 
-    /* std::ifstream infile(std::to_string(CHUNKSIZE[i]) + "_dataset.txt", std::ios_base::in); */
+    /* Iterate through every file */
+    for (size_t i = 0; i < chunkslen; ++i) {
+
+        /* Read file with proper size/name */
         std::ifstream infile(std::to_string(CHUNKSIZE[i]) + "_dataset.txt");
 
+        /* tmp string to grab the int */ 
         std::string data = "";
-        /* data.reserve(1748576); */
+        /* index to insert data */
         int j = 0;
 
-        while(std::getline(infile, data, ','))
+        /* Read line using comma as delimeter */
+        while(std::getline(infile, data, ',') && !infile.eof())
         {
-            try{
-                uns_arrays.at(i)[j] = std::stoi(data);
-            }
-            catch(std::invalid_argument){
-                std::cout << "Bad input" << std::endl;
-            }
+            std::stringstream ss(data);
 
+            /* Insert the data */
+            ss >> uns_arrays[i][j];
             j++;
         }
 
+        /* Close every file after done with it */
         infile.close();
     }
 
-    /* std::cout << uns_arrays.at(0)[999] << std::endl; */
-    arrayinfo(uns_arrays.at(0),CHUNKSIZE[0]);
+    std::cout << "Arrays populated" << std::endl;
+
+    /* for (size_t i = 0; i < chunkslen; ++i) */
+    /*     arrayinfo(uns_arrays[i], CHUNKSIZE[i]); */
+
+    /* free up memory */
+    for(auto arr : uns_arrays)
+        delete arr;
+
+    uns_arrays.clear();
 }
 
 /* Create a helper function to print an array inside a vector */
@@ -81,9 +92,9 @@ void arrayinfo(int* arr, int size){
     std::cout << size << " elements" << std::endl;
     std::cout << "And the last element is: " << arr[size-1] << std::endl;
 
-    for (int i = 0; i < size; i++) {
-        std::cout << arr[i] <<  "  ";
+    for (int i = 1; i < size; i++) {
+        std::cout << arr[i] <<  " ";
     }
 
-    std::cout << std::endl << std::endl;
+    std::cout << "\n\n";
 }
