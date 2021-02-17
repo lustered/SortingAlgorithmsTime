@@ -8,20 +8,20 @@
 #include <iostream>
 
 void heapify(int *arr, int size, int largest);
-void merge(int *arr, const int l, const int m, const int r);
+void merge(int *arr, const int l, const int m, const int r, const int size);
 int partition(int *arr, int lo, int hi);
 
-void bubbleSort(int *arr, int size) {
+void bubbleSort(int *arr, const int size) {
 
   for (size_t i = 0; i < size - 1; ++i)
     for (size_t j = 0; j < size - i - 1; ++j)
       if (arr[j] > arr[j + 1])
         std::swap(arr[j], arr[j + 1]);
 
-  arrayinfo(arr, 9);
+  /* arrayinfo(arr, size); */
 }
 
-void selectionSort(int *arr, int size) {
+void selectionSort(int *arr, const int size) {
   int low, j;
 
   for (size_t i = 1; i < size; ++i) {
@@ -36,7 +36,7 @@ void selectionSort(int *arr, int size) {
     arr[j + 1] = low;
   }
 
-  arrayinfo(arr, 9);
+  /* arrayinfo(arr, size); */
 }
 
 int partition(int *arr, int lo, int hi) {
@@ -60,8 +60,9 @@ void quickSort(int *arr, int lo, int hi) {
     pivot = partition(arr, lo, hi);
     quickSort(arr, lo, pivot);
     quickSort(arr, pivot + 1, hi);
-  } else
-    arrayinfo(arr, 9);
+  }
+
+  /* arrayinfo(arr, hi); */
 }
 
 void heapify(int *arr, int size, int lrg) {
@@ -100,10 +101,10 @@ void heapSort(int *arr, int size) {
     heapify(arr, i, 0);
   }
 
-  arrayinfo(arr, 9);
+  /* arrayinfo(arr, size); */
 }
 
-void merge(int arr[], const int l, const int m, const int r) {
+void merge(int* arr, const int l, const int m, const int r, const int size) {
   int n1 = m - l + 1;
   int n2 = r - m;
 
@@ -148,18 +149,25 @@ void merge(int arr[], const int l, const int m, const int r) {
     j++;
     k++;
   }
+
+  /* arrayinfo(arr, size); */
 }
 
 void mergeSort(int *arr, int l, int r, const int size) {
   if (l >= r) {
-    /* arrayinfo(arr, 9); */
-    return; // returns recursively
+
+    return; 
   }
 
+  /* Get middle point */
   int m = l + (r - l) / 2;
-  mergeSort(arr, l, m, 9);
-  mergeSort(arr, m + 1, r, 9);
-  merge(arr, l, m, r);
+
+  /* Sort left and right recursively */
+  mergeSort(arr, l, m, size);
+  mergeSort(arr, m + 1, r, size);
+
+  /* merge halves */
+  merge(arr, l, m, r, size);
 }
 
 void insertionSort(int *arr, const int size) {
@@ -180,6 +188,15 @@ void insertionSort(int *arr, const int size) {
   /* arrayinfo(arr, size); */
 }
 
+/* Create a helper function to print an array inside a vector */
+void arrayinfo(int *arr, const int size) {
+  std::cout << size << " elements" << std::endl;
+  std::cout << "And the last element is: " << arr[size - 1] << std::endl;
+
+  for (int i = 1; i < size; i++) {
+    std::cout << arr[i] << " ";
+  }
+}
 
 /* *************** DEBUG *************** */
 /* int main() { */

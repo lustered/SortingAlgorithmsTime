@@ -1,3 +1,3 @@
 #!/bin/bash
 # Run with all warnings
-g++ ./sortsImplementation.cpp ./sortingDriver.cpp && ./a.out && rm *.txt && rm a.out
+g++ -std=c++11 -Wall ./sortingDriver.cpp && ./a.out && rm *.txt && rm a.out

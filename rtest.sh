@@ -1,2 +1,2 @@
 #!/bin/bash
-g++ ./sortsImplementation.cpp && ./a.out 
+g++ ./sortsImplementation.cpp && ./a.out  && rm a.out
