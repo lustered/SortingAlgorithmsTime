@@ -1,0 +1,202 @@
+Insertion Sort:
+
+Runtime: 0 ms for 1000 elements
+Runtime: 10 ms for 4000 elements
+Runtime: 39 ms for 8000 elements
+Runtime: 60 ms for 10000 elements
+Runtime: 994 ms for 40000 elements
+Runtime: 3944 ms for 80000 elements
+Runtime: 6190 ms for 100000 elements
+Runtime: 100266 ms for 400000 elements
+Runtime: 395160 ms for 800000 elements
+Runtime: 618487 ms for 1000000 elements
+
+Merge Sort:
+
+Run: 1
+Runtime: 0 ms for 1000 elements
+Runtime: 0 ms for 4000 elements
+Runtime: 1 ms for 8000 elements
+Runtime: 1 ms for 10000 elements
+Runtime: 6 ms for 40000 elements
+Runtime: 14 ms for 80000 elements
+Runtime: 17 ms for 100000 elements
+Runtime: 78 ms for 400000 elements
+Runtime: 165 ms for 800000 elements
+Runtime: 210 ms for 1000000 elements
+
+Run: 2
+Runtime: 0 ms for 1000 elements
+Runtime: 0 ms for 4000 elements
+Runtime: 1 ms for 8000 elements
+Runtime: 1 ms for 10000 elements
+Runtime: 6 ms for 40000 elements
+Runtime: 14 ms for 80000 elements
+Runtime: 17 ms for 100000 elements
+Runtime: 78 ms for 400000 elements
+Runtime: 168 ms for 800000 elements
+Runtime: 223 ms for 1000000 elements
+
+Run: 3
+Runtime: 0 ms for 1000 elements
+Runtime: 0 ms for 4000 elements
+Runtime: 1 ms for 8000 elements
+Runtime: 1 ms for 10000 elements
+Runtime: 6 ms for 40000 elements
+Runtime: 14 ms for 80000 elements
+Runtime: 17 ms for 100000 elements
+Runtime: 79 ms for 400000 elements
+Runtime: 164 ms for 800000 elements
+Runtime: 215 ms for 1000000 elements
+
+Heap Sort:
+
+Run: 1
+Runtime: 0 ms for 1000 elements
+Runtime: 0 ms for 4000 elements
+Runtime: 1 ms for 8000 elements
+Runtime: 1 ms for 10000 elements
+Runtime: 6 ms for 40000 elements
+Runtime: 14 ms for 80000 elements
+Runtime: 17 ms for 100000 elements
+Runtime: 78 ms for 400000 elements
+Runtime: 164 ms for 800000 elements
+Runtime: 209 ms for 1000000 elements
+
+Run: 2
+Runtime: 0 ms for 1000 elements
+Runtime: 0 ms for 4000 elements
+Runtime: 1 ms for 8000 elements
+Runtime: 1 ms for 10000 elements
+Runtime: 6 ms for 40000 elements
+Runtime: 14 ms for 80000 elements
+Runtime: 17 ms for 100000 elements
+Runtime: 78 ms for 400000 elements
+Runtime: 164 ms for 800000 elements
+Runtime: 209 ms for 1000000 elements
+
+Run: 3
+Runtime: 0 ms for 1000 elements
+Runtime: 0 ms for 4000 elements
+Runtime: 1 ms for 8000 elements
+Runtime: 1 ms for 10000 elements
+Runtime: 6 ms for 40000 elements
+Runtime: 14 ms for 80000 elements
+Runtime: 17 ms for 100000 elements
+Runtime: 78 ms for 400000 elements
+Runtime: 165 ms for 800000 elements
+Runtime: 209 ms for 1000000 elements
+
+Quick Sort:
+
+Run: 1
+Runtime: 0 ms for 1000 elements
+Runtime: 0 ms for 4000 elements
+Runtime: 1 ms for 8000 elements
+Runtime: 1 ms for 10000 elements
+Runtime: 7 ms for 40000 elements
+Runtime: 16 ms for 80000 elements
+Runtime: 22 ms for 100000 elements
+Runtime: 97 ms for 400000 elements
+Runtime: 204 ms for 800000 elements
+Runtime: 260 ms for 1000000 elements
+
+Run: 2
+Runtime: 0 ms for 1000 elements
+Runtime: 0 ms for 4000 elements
+Runtime: 1 ms for 8000 elements
+Runtime: 1 ms for 10000 elements
+Runtime: 7 ms for 40000 elements
+Runtime: 16 ms for 80000 elements
+Runtime: 22 ms for 100000 elements
+Runtime: 98 ms for 400000 elements
+Runtime: 204 ms for 800000 elements
+Runtime: 260 ms for 1000000 elements
+
+Run: 3
+Runtime: 0 ms for 1000 elements
+Runtime: 0 ms for 4000 elements
+Runtime: 1 ms for 8000 elements
+Runtime: 1 ms for 10000 elements
+Runtime: 8 ms for 40000 elements
+Runtime: 17 ms for 80000 elements
+Runtime: 21 ms for 100000 elements
+Runtime: 97 ms for 400000 elements
+Runtime: 204 ms for 800000 elements
+Runtime: 260 ms for 1000000 elements
+
+Selection Sort:
+
+Run: 1
+Runtime: 0 ms for 1000 elements
+Runtime: 9 ms for 4000 elements
+Runtime: 39 ms for 8000 elements
+Runtime: 61 ms for 10000 elements
+Runtime: 985 ms for 40000 elements
+Runtime: 3944 ms for 80000 elements
+Runtime: 6203 ms for 100000 elements
+Runtime: 102049 ms for 400000 elements
+Runtime: 404365 ms for 800000 elements
+Runtime: 619446 ms for 1000000 elements
+
+Run: 2
+Runtime: 0 ms for 1000 elements
+Runtime: 9 ms for 4000 elements
+Runtime: 38 ms for 8000 elements
+Runtime: 61 ms for 10000 elements
+Runtime: 978 ms for 40000 elements
+Runtime: 3916 ms for 80000 elements
+Runtime: 6179 ms for 100000 elements
+Runtime: 98978 ms for 400000 elements
+Runtime: 394821 ms for 800000 elements
+Runtime: 618166 ms for 1000000 elements
+
+Run: 3
+Runtime: 0 ms for 1000 elements
+Runtime: 9 ms for 4000 elements
+Runtime: 38 ms for 8000 elements
+Runtime: 60 ms for 10000 elements
+Runtime: 983 ms for 40000 elements
+Runtime: 3907 ms for 80000 elements
+Runtime: 6162 ms for 100000 elements
+Runtime: 99017 ms for 400000 elements
+Runtime: 394435 ms for 800000 elements
+Runtime: 618741 ms for 1000000 elements
+
+Bubble Sort:
+
+Run: 1
+Runtime: 4 ms for 1000 elements
+Runtime: 74 ms for 4000 elements
+Runtime: 302 ms for 8000 elements
+Runtime: 474 ms for 10000 elements
+Runtime: 7720 ms for 40000 elements
+Runtime: 30849 ms for 80000 elements
+Runtime: 48272 ms for 100000 elements
+Runtime: 772437 ms for 400000 elements
+Runtime: 3073936 ms for 800000 elements
+Runtime: 4788827 ms for 1000000 elements
+
+Run: 2
+Runtime: 4 ms for 1000 elements
+Runtime: 74 ms for 4000 elements
+Runtime: 304 ms for 8000 elements
+Runtime: 472 ms for 10000 elements
+Runtime: 7641 ms for 40000 elements
+Runtime: 30711 ms for 80000 elements
+Runtime: 47854 ms for 100000 elements
+Runtime: 765781 ms for 400000 elements
+Runtime: 3062525 ms for 800000 elements
+Runtime: 4801829 ms for 1000000 elements
+
+Run: 3
+Runtime: 4 ms for 1000 elements
+Runtime: 74 ms for 4000 elements
+Runtime: 300 ms for 8000 elements
+Runtime: 474 ms for 10000 elements
+Runtime: 7790 ms for 40000 elements
+Runtime: 30559 ms for 80000 elements
+Runtime: 48096 ms for 100000 elements
+Runtime: 767455 ms for 400000 elements
+Runtime: 3066829 ms for 800000 elements
+Runtime: 4797629 ms for 1000000 elements

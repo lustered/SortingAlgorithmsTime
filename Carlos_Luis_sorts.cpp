@@ -1,17 +1,19 @@
+#include <array>
 #include <chrono>
 #include <fstream>
 #include <iostream>
+#include <iterator>
 #include <sstream>
 #include <string>
 #include <vector>
 
-#include "algorithms/bubble_sort.h"
-#include "algorithms/heap_sort.h"
-#include "algorithms/insertion_sort.h"
-#include "algorithms/merge_sort.h"
-#include "algorithms/quick_sort.h"
-#include "algorithms/selection_sort.h"
-#include "algorithms/utils.h"
+#include "algorithms/carlosluis_bubble_sort.h"
+#include "algorithms/carlosluis_heap_sort.h"
+#include "algorithms/carlosluis_insertion_sort.h"
+#include "algorithms/carlosluis_merge_sort.h"
+#include "algorithms/carlosluis_quick_sort.h"
+#include "algorithms/carlosluis_selection_sort.h"
+#include "algorithms/carlosluis_utils.h"
 
 void generateDatasets();
 void createArraysFromDatasets();
@@ -53,102 +55,105 @@ void generateDatasets() {
 
 void createArraysFromDatasets() {
 
-  /* Notes:
-   * This is an unsafe workaround allocating dynamic memory to store varying
-   * size arrays. It'd be safer(ideally) to use std::vector<std::vector> or my
-   * own implementation of an array struct.
-   *
-   * This workaround is merely used for terms of simplicity and reduction of
-   * repetition Since the assignment requires arrays
-   * */
-  /* Create a vector of pointers to contain the arrays to sort*/
-  std::vector<int *> uns_arrays = std::vector<int *>();
-  uns_arrays.reserve(10);
+  for (size_t tmp = 0; tmp < 3; ++tmp) {
 
-  /* Populate vector with arrays to sort with its correct size */
-  for (size_t i = 0; i < chunkslen; ++i)
-    uns_arrays.push_back(new int[CHUNKSIZE[i]]);
+    /* Notes:
+     * This is an unsafe workaround allocating dynamic memory to store varying
+     * size arrays. It'd be safer(ideally) to use std::vector<std::vector> or my
+     * own implementation of an array struct.
+     *
+     * This workaround is merely used for terms of simplicity and reduction of
+     * repetition Since the assignment requires arrays
+     * */
+    /* Create a vector of pointers to contain the arrays to sort*/
+    std::vector<int *> uns_arrays = std::vector<int *>();
+    uns_arrays.reserve(10);
 
-  /* **************************************** */
+    /* Populate vector with arrays to sort with its correct size */
+    for (size_t i = 0; i < chunkslen; ++i)
+      uns_arrays.push_back(new int[CHUNKSIZE[i]]);
 
-  /* Iterate through every file */
-  for (size_t i = 0; i < chunkslen; ++i) {
+    /* **************************************** */
 
-    /* Read file with proper size/name */
-    std::ifstream infile(std::to_string(CHUNKSIZE[i]) + "_dataset.txt");
+    /* Iterate through every file */
+    for (size_t i = 0; i < chunkslen; ++i) {
 
-    /* tmp string to grab the int */
-    std::string data = "";
-    /* index to insert data */
-    int j = 0;
+      /* Read file with proper size/name */
+      std::ifstream infile(std::to_string(CHUNKSIZE[i]) + "_dataset.txt");
 
-    /* Read line using comma as delimeter */
-    while (std::getline(infile, data, ',') && !infile.eof()) {
-      std::stringstream ss(data);
+      /* tmp string to grab the int */
+      std::string data = "";
+      /* index to insert data */
+      int j = 0;
 
-      /* Insert the data */
-      ss >> uns_arrays[i][j];
-      j++;
+      /* Read line using comma as delimeter */
+      while (std::getline(infile, data, ',') && !infile.eof()) {
+        std::stringstream ss(data);
+
+        /* Insert the data */
+        ss >> uns_arrays[i][j];
+        j++;
+      }
+
+      /* Close every file after done with it */
+      infile.close();
     }
 
-    /* Close every file after done with it */
-    infile.close();
+    std::cout << "\nArrays populated" << std::endl;
+
+    std::cout << "\n\nRun: " << tmp+1 << std::endl;
+    calculateTime(uns_arrays, false);
+
+    /* free up memory */
+    for (auto &arr : uns_arrays)
+      delete arr;
+
+    uns_arrays.clear();
   }
-
-  std::cout << "Arrays populated" << std::endl;
-
-  calculateTime(uns_arrays, 9, true);
-
-  /* free up memory */
-  for (auto &arr : uns_arrays)
-    delete arr;
-
-  uns_arrays.clear();
 }
 
 /* *********************************************************************** */
 
 /* IMPLEMENTATION OF SORTS AND UTILITY FUNCTIONS */
-void calculateTime(std::vector<int*> uns_arrays, int i, bool print) {
 
-  /* Start measuring time */
-  auto start = std::chrono::system_clock::now();
+void calculateTime(std::vector<int *> uns_arrays, bool print) {
 
-  /* ********************************************* 
-   *
-   * Uncomment the algorithm to test
-   * 
-   * */
+  for (size_t i = 0; i < chunkslen; ++i) {
 
-  /* selectionSort(uns_arrays[i], CHUNKSIZE[i]); */
-  /* bubbleSort(uns_arrays[i], CHUNKSIZE[i]); */
-  /* insertionSort(uns_arrays[i], CHUNKSIZE[i]); */
-  mergeSort(uns_arrays[i], 0, CHUNKSIZE[i]-1, CHUNKSIZE[i]);
-  /* quickSort(uns_arrays[i], 0, CHUNKSIZE[i]); */
-  /* heapSort(uns_arrays[i], CHUNKSIZE[i]); */
+    /************************************************
+     *                                              *
+     *     Uncomment the algorithm to test          *
+     *                                              *
+     ************************************************/
 
-  /* ********************************************* */
+    /* Start measuring time */
+    auto start = std::chrono::system_clock::now();
 
-  /* Stop measuring time */
-  auto end = std::chrono::system_clock::now();
+    /* selectionSort(uns_arrays[i], CHUNKSIZE[i]); */
+    bubbleSort(uns_arrays[i], CHUNKSIZE[i]);
+    /* insertionSort(uns_arrays[i], CHUNKSIZE[i]); */
+    /* mergeSort(uns_arrays[i], 0, CHUNKSIZE[i] - 1, CHUNKSIZE[i]); */
+    /* quickSort(uns_arrays[i], 0, CHUNKSIZE[i]); */
+    /* heapSort(uns_arrays[i], CHUNKSIZE[i]); */
 
-  if (print == true)
-    arrayinfo(uns_arrays[i], CHUNKSIZE[i]);
+    /* Stop measuring time */
+    auto end = std::chrono::system_clock::now();
 
-  auto ms = std::chrono::duration_cast<std::chrono::milliseconds>(end - start).count();
+    if (print == true)
+      arrayinfo(uns_arrays[i], CHUNKSIZE[i]);
 
-  std::cout << "\n\nRuntime: " << ms << " ms" << std::endl;
+    auto ms = std::chrono::duration_cast<std::chrono::milliseconds>(end - start)
+                  .count();
 
-
-  /* print all the arrays */
-  /* for (size_t i = 0; i < chunkslen; ++i) */
-  /*     arrayinfo(uns_arrays[i], CHUNKSIZE[i]); */
+    std::cout << "Runtime: " << ms << " ms for " << CHUNKSIZE[i] << " elements"
+              << std::endl;
+  }
 }
 
 void bubbleSort(int *arr, const int size) {
 
-  for (size_t i = 0; i < size - 1; ++i)
-    for (size_t j = 0; j < size - i - 1; ++j)
+  for (int i = 0; i < size - 1; ++i)
+    for (int j = 0; j < size - i - 1; ++j)
       if (arr[j] > arr[j + 1])
         std::swap(arr[j], arr[j + 1]);
 
@@ -158,7 +163,7 @@ void bubbleSort(int *arr, const int size) {
 void selectionSort(int *arr, const int size) {
   int low, j;
 
-  for (size_t i = 1; i < size; ++i) {
+  for (int i = 1; i < size; ++i) {
     low = arr[i];
     j = i - 1;
 
@@ -238,7 +243,7 @@ void heapSort(int *arr, int size) {
   /* arrayinfo(arr, size); */
 }
 
-void merge(int* arr, const int l, const int m, const int r, const int size) {
+void merge(int *arr, const int l, const int m, const int r, const int size) {
   int n1 = m - l + 1;
   int n2 = r - m;
 
@@ -290,7 +295,7 @@ void merge(int* arr, const int l, const int m, const int r, const int size) {
 void mergeSort(int *arr, int l, int r, const int size) {
   if (l >= r) {
 
-    return; 
+    return;
   }
 
   /* Get middle point */
@@ -324,7 +329,7 @@ void insertionSort(int *arr, const int size) {
 
 /* Create a helper function to print an array inside a vector */
 void arrayinfo(int *arr, const int size) {
-  std::cout << size << " elements" << std::endl;
+  std::cout << "\n\n" << size << " elements" << std::endl;
   std::cout << "And the last element is: " << arr[size - 1] << std::endl;
 
   for (int i = 1; i < size; i++) {
