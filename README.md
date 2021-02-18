@@ -2,13 +2,16 @@
 
     Ubuntu linux kernel: 4.15.0-72-generic
     g++ (Ubuntu 7.5.0-3ubuntu1~18.04) 7.5.0
+    16 GB DDR4 RAM
+    Solid State Drive
+    Intel i7-6700HQ CPU
 
 ## Compilation and execution instructions
 
     g++ -std=c++11 -Wall Carlos_Luis_sorts.cpp
     ./a.out
 
-#### To choose the algorithm, uncomment the lines 132-137. A single algorithm was tested each run.
+#### To choose the algorithm, uncomment the lines 144-148. A single algorithm was tested each run.
 
     /* selectionSort(uns_arrays[i], CHUNKSIZE[i]); */
     /* bubbleSort(uns_arrays[i], CHUNKSIZE[i]); */
@@ -19,7 +22,7 @@
 
 ## Verbose output of sorted arrays
 
-#### If you want verbose output of the arrays after being sorted, change the second param to **true** in line 105.
+#### If you want verbose output of the arrays after being sorted, change the second param to true in line 116.
 
 ##### Example
 
@@ -27,14 +30,13 @@
 
 #### Function signature
 
-    void calculateTime(std::vector<int*> uns_arrays, bool print = false);
+    void calculateTime(std::vector<int*> &uns_arrays, bool print = false);
 
-- print - true to print the array after being sorted. Defaut is false.
 
 | print |                                |
 | ----- | ------------------------------ |
-| false | Does not print array when done |
-| true  | Prints array when done         |
+| false (default)| Does not print array when done |
+| true           | Prints array when done         |
 
 ### The pre-defined sizes-to-index for the datasets:
 
@@ -56,3 +58,8 @@
 ### Method used to create data.log using a bash script
 
     ./run.sh >> data.log
+
+### Creating and running executable  
+
+    g++ -Wall -o Carlos_Luis_sorts.exe Carlos_Luis_sorts.cpp
+    ./Carlos_Luis_sorts.exe

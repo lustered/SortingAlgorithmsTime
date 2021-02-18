@@ -29,7 +29,17 @@ int main() {
   generateDatasets();
   createArraysFromDatasets();
 
-  return 0;
+  /********************* DEBUG ********************* */
+  /* int test[]{10, 8, 0, 9, 4, 1, -5}; */
+  /* insertionSort(test, 7); */
+  /* selectionSort(test, 7); */
+  /* quickSort(test, 0, 7); */
+  /* mergeSort(test, 0, 7, 7); */
+  /* bubbleSort(test, 7); */
+  /* heapSort(test, 7); */
+  /* arrayinfo(test, 7); */
+
+  /* return 0; */
 }
 
 void generateDatasets() {
@@ -65,6 +75,7 @@ void createArraysFromDatasets() {
      * This workaround is merely used for terms of simplicity and reduction of
      * repetition Since the assignment requires arrays
      * */
+
     /* Create a vector of pointers to contain the arrays to sort*/
     std::vector<int *> uns_arrays = std::vector<int *>();
     uns_arrays.reserve(10);
@@ -101,7 +112,7 @@ void createArraysFromDatasets() {
 
     std::cout << "\nArrays populated" << std::endl;
 
-    std::cout << "\n\nRun: " << tmp+1 << std::endl;
+    std::cout << "\n\nRun: " << tmp + 1 << std::endl;
     calculateTime(uns_arrays, false);
 
     /* free up memory */
@@ -116,7 +127,7 @@ void createArraysFromDatasets() {
 
 /* IMPLEMENTATION OF SORTS AND UTILITY FUNCTIONS */
 
-void calculateTime(std::vector<int *> uns_arrays, bool print) {
+void calculateTime(std::vector<int *> &uns_arrays, bool print) {
 
   for (size_t i = 0; i < chunkslen; ++i) {
 
@@ -129,8 +140,8 @@ void calculateTime(std::vector<int *> uns_arrays, bool print) {
     /* Start measuring time */
     auto start = std::chrono::system_clock::now();
 
-    /* selectionSort(uns_arrays[i], CHUNKSIZE[i]); */
-    bubbleSort(uns_arrays[i], CHUNKSIZE[i]);
+    selectionSort(uns_arrays[i], CHUNKSIZE[i]);
+    /* bubbleSort(uns_arrays[i], CHUNKSIZE[i]); */
     /* insertionSort(uns_arrays[i], CHUNKSIZE[i]); */
     /* mergeSort(uns_arrays[i], 0, CHUNKSIZE[i] - 1, CHUNKSIZE[i]); */
     /* quickSort(uns_arrays[i], 0, CHUNKSIZE[i]); */
@@ -150,8 +161,9 @@ void calculateTime(std::vector<int *> uns_arrays, bool print) {
   }
 }
 
-void bubbleSort(int *arr, const int size) {
+void bubbleSort(int *arr, const int &size) {
 
+  /* Classic bubble sort, not "optimized" */
   for (int i = 0; i < size - 1; ++i)
     for (int j = 0; j < size - i - 1; ++j)
       if (arr[j] > arr[j + 1])
@@ -160,30 +172,29 @@ void bubbleSort(int *arr, const int size) {
   /* arrayinfo(arr, size); */
 }
 
-void selectionSort(int *arr, const int size) {
-  int low, j;
+void selectionSort(int *arr, const int &size) {
+  int min;
 
-  for (int i = 1; i < size; ++i) {
-    low = arr[i];
-    j = i - 1;
+  /* Iterate up until the second to last element */
+  for (int i = 0; i < size - 1; i++) {
 
-    while (j >= 0 && arr[j] > low) {
-      arr[j + 1] = arr[j];
-      j--;
-    }
+    min = i;
 
-    arr[j + 1] = low;
+    /* Find a smaller element */
+    for (int j = i + 1; j < size; j++)
+      if (arr[j] < arr[min])
+        min = j;
+
+    /* Swap the new min with the initial one */
+    std::swap(arr[min], arr[i]);
   }
-
-  /* arrayinfo(arr, size); */
 }
 
-int partition(int *arr, int lo, int hi) {
+int partition(int *arr, const int &lo, const int &hi) {
   int pivot = arr[lo];
   int i = lo;
-  int j;
 
-  for (j = lo + 1; j < hi; j++)
+  for (int j = lo + 1; j < hi; j++)
     if (arr[j] <= pivot) {
       i = i + 1;
       std::swap(arr[i], arr[j]);
@@ -193,98 +204,103 @@ int partition(int *arr, int lo, int hi) {
   return i;
 }
 
-void quickSort(int *arr, int lo, int hi) {
+void quickSort(int *arr, const int &lo, const int &hi) {
   int pivot;
+
   if (lo < hi) {
     pivot = partition(arr, lo, hi);
+
+    /* Sort left partition */
     quickSort(arr, lo, pivot);
+
+    /* Sort right partition */
     quickSort(arr, pivot + 1, hi);
   }
 
   /* arrayinfo(arr, hi); */
 }
 
-void heapify(int *arr, int size, int lrg) {
+void buildHeap(int *arr, const int &size, const int &lrg) {
+
   int tmplrg = lrg;
-  int l = 2 * lrg + 1;
-  int r = 2 * lrg + 2;
+  int leftnode = 2 * lrg + 1;
+  int rightnode = 2 * lrg + 2;
 
-  // If left child is larger than root
-  if (l < size && arr[l] > arr[tmplrg])
-    tmplrg = l;
+  /* Check if the left node is bigger */ 
+  if (leftnode < size && arr[leftnode] > arr[tmplrg])
+    tmplrg = leftnode;
 
-  // If right child is larger than largest so far
-  if (r < size && arr[r] > arr[tmplrg])
-    tmplrg = r;
+  /* Check if the right node is bigger */ 
+  if (rightnode < size && arr[rightnode] > arr[tmplrg])
+    tmplrg = rightnode;
 
-  // If largest is not root
+  /* If there is a new largest, set it as root node */
   if (tmplrg != lrg) {
     std::swap(arr[lrg], arr[tmplrg]);
 
-    // Recursively heapify the affected sub-tree
-    heapify(arr, size, tmplrg);
+    /* call function recursively using the new largest */
+    buildHeap(arr, size, tmplrg);
   }
 }
 
-void heapSort(int *arr, int size) {
-  // Build heap (rearrange array)
-  for (int i = size / 2 - 1; i >= 0; i--)
-    heapify(arr, size, i);
+void heapSort(int *arr, const int &size) {
 
-  // One by one extract an element from heap
+  /* Build max heap */
+  for (int i = size / 2 - 1; i >= 0; i--)
+    buildHeap(arr, size, i);
+
+  /* Heap sort */
   for (int i = size - 1; i > 0; i--) {
-    // Move current root to end
+
     std::swap(arr[0], arr[i]);
 
-    // call max heapify on the reduced heap
-    heapify(arr, i, 0);
+    /* Get the largest element as root node */
+    buildHeap(arr, i, 0);
   }
 
   /* arrayinfo(arr, size); */
 }
 
-void merge(int *arr, const int l, const int m, const int r, const int size) {
-  int n1 = m - l + 1;
-  int n2 = r - m;
+void merge(int *arr, const int &l, const int &m, const int &r, const int &size) {
+  int size1 = m - l + 1;
+  int size2 = r - m;
 
-  // Create temp arrays
-  int L[n1], R[n2];
+  /* Left and right halves: This might become an issue with an array that */
+  /* doesn't fit on the stack, then we'd need to create them on the heap */
+  int left[size1];
+  int right[size2];
 
-  // Copy data to temp arrays L[] and R[]
-  for (int i = 0; i < n1; i++)
-    L[i] = arr[l + i];
-  for (int j = 0; j < n2; j++)
-    R[j] = arr[m + 1 + j];
+  /* Populate the arrays */
+  for (int i = 0; i < size1; i++)
+    left[i] = arr[l + i];
 
-  // Merge the temp arrays back into arr[l..r]
+  for (int j = 0; j < size2; j++)
+    right[j] = arr[m + 1 + j];
 
-  // Initial index of first subarray
+  /* Keep track of both tmp arrays indexes and main arr */
   int i = 0, j = 0;
   int k = l;
 
-  while (i < n1 && j < n2) {
-    if (L[i] <= R[j]) {
-      arr[k] = L[i];
+  while (i < size1 && j < size2) {
+    if (left[i] <= right[j]) {
+      arr[k] = left[i];
       i++;
     } else {
-      arr[k] = R[j];
+      arr[k] = right[j];
       j++;
     }
     k++;
   }
 
-  // Copy the remaining elements of
-  // L[], if there are any
-  while (i < n1) {
-    arr[k] = L[i];
+  /* Move the elements left from both tmp arrays back */
+  while (i < size1) {
+    arr[k] = left[i];
     i++;
     k++;
   }
 
-  // Copy the remaining elements of
-  // R[], if there are any
-  while (j < n2) {
-    arr[k] = R[j];
+  while (j < size2) {
+    arr[k] = right[j];
     j++;
     k++;
   }
@@ -292,7 +308,7 @@ void merge(int *arr, const int l, const int m, const int r, const int size) {
   /* arrayinfo(arr, size); */
 }
 
-void mergeSort(int *arr, int l, int r, const int size) {
+void mergeSort(int *arr, const int &l, const int &r, const int &size) {
   if (l >= r) {
 
     return;
@@ -309,30 +325,30 @@ void mergeSort(int *arr, int l, int r, const int size) {
   merge(arr, l, m, r, size);
 }
 
-void insertionSort(int *arr, const int size) {
-  int i, pivot, j;
-  for (i = 1; i < size; i++) {
-    pivot = arr[i];
+void insertionSort(int *arr, const int &size) {
+  int low, j;
+
+  /* Iterate from the second to last element */
+  for (int i = 1; i < size; ++i) {
+    low = arr[i];
     j = i - 1;
 
-    /* Move elements of arr[0..i-1], that are
-    greater than pivot, to one position ahead
-    of their current position */
-    while (j >= 0 && arr[j] > pivot) {
+    /* Push elements if they're greater than curr key*/
+    while (j >= 0 && arr[j] > low) {
       arr[j + 1] = arr[j];
       j = j - 1;
     }
-    arr[j + 1] = pivot;
+    arr[j + 1] = low;
   }
+
   /* arrayinfo(arr, size); */
 }
 
-/* Create a helper function to print an array inside a vector */
-void arrayinfo(int *arr, const int size) {
+void arrayinfo(int *arr, const int &size) {
   std::cout << "\n\n" << size << " elements" << std::endl;
   std::cout << "And the last element is: " << arr[size - 1] << std::endl;
 
-  for (int i = 1; i < size; i++) {
+  for (int i = 0; i < size; i++) {
     std::cout << arr[i] << " ";
   }
 }
