@@ -1,17 +1,9 @@
-## System properties
-
-    Ubuntu linux kernel: 4.15.0-72-generic
-    g++ (Ubuntu 7.5.0-3ubuntu1~18.04) 7.5.0
-    16 GB DDR4 RAM
-    Solid State Drive
-    Intel i7-6700HQ CPU
-
 ## Compilation and execution instructions
 
     g++ -std=c++11 -Wall Carlos_Luis_sorts.cpp
     ./a.out
 
-#### To choose the algorithm, uncomment the lines 144-148. A single algorithm was tested each run.
+#### To choose the algorithm, uncomment the lines 166-171. A single algorithm was tested each run.
 
     /* selectionSort(uns_arrays[i], CHUNKSIZE[i]); */
     /* bubbleSort(uns_arrays[i], CHUNKSIZE[i]); */
@@ -22,7 +14,7 @@
 
 ## Verbose output of sorted arrays
 
-#### If you want verbose output of the arrays after being sorted, change the second param to true in line 116.
+#### If you want verbose output of the arrays after being sorted, change the second param to true in line 136.
 
 ##### Example
 
@@ -54,6 +46,15 @@
 | 1000000 | 9     |
 
 ## Misc
+
+### System properties
+
+    Ubuntu linux kernel: 4.15.0-72-generic
+    g++ (Ubuntu 7.5.0-3ubuntu1~18.04) 7.5.0
+    16 GB DDR4 RAM
+    Solid State Drive
+    Intel i7-6700HQ CPU
+
 
 ### Method used to create data.log using a bash script
 
