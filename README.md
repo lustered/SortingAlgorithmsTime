@@ -51,16 +51,15 @@
 
     Ubuntu linux kernel: 4.15.0-72-generic
     g++ (Ubuntu 7.5.0-3ubuntu1~18.04) 7.5.0
-    16 GB DDR4 RAM
+    16GB DDR4 RAM
     Solid State Drive
     Intel i7-6700HQ CPU
 
-
 ### Method used to create data.log using a bash script
 
-    ./run.sh >> data.log
+    ./run.sh >> data/data.log
 
 ### Creating and running executable  
 
-    g++ -Wall -o Carlos_Luis_sorts.exe Carlos_Luis_sorts.cpp
+    g++ -std=c++11 -Wall Carlos_Luis_sorts.cpp -o Carlos_Luis_sorts.exe 
     ./Carlos_Luis_sorts.exe

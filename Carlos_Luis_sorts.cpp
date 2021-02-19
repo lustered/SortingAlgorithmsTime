@@ -32,7 +32,7 @@ void createArraysFromDatasets();
 const int CHUNKSIZE[] { 1000,  4000,   8000,   10000,  40000, 80000, 100000,
                         400000, 800000, 1000000 };
 
-/* amount of datasets */
+/* Amount of datasets */
 const int chunkslen = sizeof(CHUNKSIZE) / sizeof(CHUNKSIZE[0]);
 
 int main() 
@@ -140,7 +140,7 @@ void createArraysFromDatasets()
       delete arr;
 
     uns_arrays.clear();
-  }
+  } // End of outer for 
 } // End createArraysFromDatasets
 
 
@@ -300,15 +300,19 @@ void heapSort(int *arr, const int &size)
 } // End heapSort
 
 void merge(int *arr, const int &l, const int &m, const int &r, const int &size) 
-// Helper function for the merge sort algorithm
+// Implementation of the merge sort
 {
   int size1 = m - l + 1;
   int size2 = r - m;
 
   /* Left and right halves: This might become an issue with an array that */
   /* doesn't fit on the stack, then we'd need to create them on the heap */
-  int left[size1];
-  int right[size2];
+  /* int left[size1]; */
+  /* int right[size2]; */
+
+  /* Which we implement here */
+  int* left = new int[size1];
+  int* right = new int[size2];
 
   /* Populate the arrays */
   for (int i = 0; i < size1; i++)
@@ -350,7 +354,11 @@ void merge(int *arr, const int &l, const int &m, const int &r, const int &size)
     k++;
   }
 
+  delete[] left;
+  delete[] right;
+
   /* arrayinfo(arr, size); */
+
 } //End merge 
 
 void mergeSort(int *arr, const int &l, const int &r, const int &size) 
