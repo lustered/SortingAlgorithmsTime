@@ -27,6 +27,7 @@
 
 void generateDatasets();
 void createArraysFromDatasets();
+void calculateTime(int* uns_arrays, bool print);
 
 /* Fixed sizes for every dataset */
 const int CHUNKSIZE[] { 1000,  4000,   8000,   10000,  40000, 80000, 100000,
@@ -95,12 +96,14 @@ void createArraysFromDatasets()
      * */
 
     /* Create a vector of pointers to contain the arrays to sort*/
-    std::vector<int *> uns_arrays = std::vector<int *>();
-    uns_arrays.reserve(10);
+    /* std::vector<int *> uns_arrays = std::vector<int *>(); */
+    int** uns_arrays = new int*[chunkslen];
+    /* uns_arrays.reserve(10); */
 
     /* Populate vector with arrays to sort with its correct size */
     for (size_t i = 0; i < chunkslen; ++i)
-      uns_arrays.push_back(new int[CHUNKSIZE[i]]);
+      /* uns_arrays.push_back(new int[CHUNKSIZE[i]]); */
+      uns_arrays[i] = new int[CHUNKSIZE[i]];
 
     /* **************************************** */
 
@@ -133,13 +136,11 @@ void createArraysFromDatasets()
     std::cout << "\nArrays populated" << std::endl;
 
     std::cout << "\n\nRun: " << tmp + 1 << std::endl;
-    calculateTime(uns_arrays, false);
+    calculateTime(*uns_arrays, false);
 
     /* free up memory */
-    for (auto &arr : uns_arrays)
-      delete arr;
+    delete[] uns_arrays;
 
-    uns_arrays.clear();
   } // End of outer for 
 } // End createArraysFromDatasets
 
@@ -147,7 +148,7 @@ void createArraysFromDatasets()
 /*          IMPLEMENTATION OF SORTS AND UTILITY FUNCTIONS */
 /************************************************************************/
 
-void calculateTime(std::vector<int *> &uns_arrays, bool print) 
+void calculateTime(int* uns_arrays, bool print) 
 // Sorts all of the datasets with a selected sort algorithm  and calculates time
 {
 
@@ -163,18 +164,18 @@ void calculateTime(std::vector<int *> &uns_arrays, bool print)
     /* Start measuring time */
     auto start = std::chrono::system_clock::now();
 
-   // selectionSort(uns_arrays[i], CHUNKSIZE[i]);
-   // bubbleSort(uns_arrays[i], CHUNKSIZE[i]);
-   // insertionSort(uns_arrays[i], CHUNKSIZE[i]);
-    mergeSort(uns_arrays[i], 0, CHUNKSIZE[i] - 1, CHUNKSIZE[i]);
-   // quickSort(uns_arrays[i], 0, CHUNKSIZE[i]);
-   // heapSort(uns_arrays[i], CHUNKSIZE[i]);
+   // selectionSort(&uns_arrays[i], CHUNKSIZE[i]);
+   // bubbleSort(&uns_arrays[i], CHUNKSIZE[i]);
+   // insertionSort(&uns_arrays[i], CHUNKSIZE[i]);
+    mergeSort(&uns_arrays[i], 0, CHUNKSIZE[i] - 1, CHUNKSIZE[i]);
+   // quickSort(&uns_arrays[i], 0, CHUNKSIZE[i]);
+   // heapSort(&uns_arrays[i], CHUNKSIZE[i]);
 
     /* Stop measuring time */
     auto end = std::chrono::system_clock::now();
 
     if (print == true)
-      arrayinfo(uns_arrays[i], CHUNKSIZE[i]);
+      arrayinfo(&uns_arrays[i], CHUNKSIZE[i]);
 
     auto ms = std::chrono::duration_cast<std::chrono::milliseconds>(end - start)
                   .count();
