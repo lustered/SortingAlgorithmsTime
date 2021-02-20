@@ -17,13 +17,13 @@
 #include <string>
 #include <vector>
 
-#include "algorithms/carlosluis_bubble_sort.h"
-#include "algorithms/carlosluis_heap_sort.h"
-#include "algorithms/carlosluis_insertion_sort.h"
-#include "algorithms/carlosluis_merge_sort.h"
-#include "algorithms/carlosluis_quick_sort.h"
-#include "algorithms/carlosluis_selection_sort.h"
-#include "algorithms/carlosluis_utils.h"
+#include "carlosluis_bubble_sort.h"
+#include "carlosluis_heap_sort.h"
+#include "carlosluis_insertion_sort.h"
+#include "carlosluis_merge_sort.h"
+#include "carlosluis_quick_sort.h"
+#include "carlosluis_selection_sort.h"
+#include "carlosluis_utils.h"
 
 void generateDatasets();
 void createArraysFromDatasets();
@@ -34,7 +34,7 @@ const int CHUNKSIZE[] { 1000,  4000,   8000,   10000,  40000, 80000, 100000,
                         400000, 800000, 1000000 };
 
 /* Amount of datasets */
-const int chunkslen = sizeof(CHUNKSIZE) / sizeof(CHUNKSIZE[0]);
+const int CHUNKSLEN = sizeof(CHUNKSIZE) / sizeof(CHUNKSIZE[0]);
 
 int main() 
 {
@@ -61,7 +61,7 @@ void generateDatasets()
   srand(777);
 
   /* Iterate over the pre-defined sizes*/
-  for (size_t i = 0; i < chunkslen; i++) 
+  for (size_t i = 0; i < CHUNKSLEN; i++) 
   {
 
     std::string chunk = "";
@@ -97,18 +97,18 @@ void createArraysFromDatasets()
 
     /* Create a vector of pointers to contain the arrays to sort*/
     /* std::vector<int *> uns_arrays = std::vector<int *>(); */
-    int** uns_arrays = new int*[chunkslen];
+    int** uns_arrays = new int*[CHUNKSLEN];
     /* uns_arrays.reserve(10); */
 
     /* Populate vector with arrays to sort with its correct size */
-    for (size_t i = 0; i < chunkslen; ++i)
+    for (size_t i = 0; i < CHUNKSLEN; ++i)
       /* uns_arrays.push_back(new int[CHUNKSIZE[i]]); */
       uns_arrays[i] = new int[CHUNKSIZE[i]];
 
     /* **************************************** */
 
     /* Iterate through every file */
-    for (size_t i = 0; i < chunkslen; ++i) 
+    for (size_t i = 0; i < CHUNKSLEN; ++i) 
     {
 
       /* Read file with proper size/name */
@@ -152,7 +152,7 @@ void calculateTime(int* uns_arrays, bool print)
 // Sorts all of the datasets with a selected sort algorithm  and calculates time
 {
 
-  for (size_t i = 0; i < chunkslen; ++i) 
+  for (size_t i = 0; i < CHUNKSLEN; ++i) 
   {
 
     /************************************************
@@ -164,8 +164,8 @@ void calculateTime(int* uns_arrays, bool print)
     /* Start measuring time */
     auto start = std::chrono::system_clock::now();
 
-   // selectionSort(&uns_arrays[i], CHUNKSIZE[i]);
-   // bubbleSort(&uns_arrays[i], CHUNKSIZE[i]);
+    // selectionSort(&uns_arrays[i], CHUNKSIZE[i]);
+    // bubbleSort(&uns_arrays[i], CHUNKSIZE[i]);
    // insertionSort(&uns_arrays[i], CHUNKSIZE[i]);
     mergeSort(&uns_arrays[i], 0, CHUNKSIZE[i] - 1, CHUNKSIZE[i]);
    // quickSort(&uns_arrays[i], 0, CHUNKSIZE[i]);
@@ -174,7 +174,7 @@ void calculateTime(int* uns_arrays, bool print)
     /* Stop measuring time */
     auto end = std::chrono::system_clock::now();
 
-    if (print == true)
+    /* if (print == true) */
       arrayinfo(&uns_arrays[i], CHUNKSIZE[i]);
 
     auto ms = std::chrono::duration_cast<std::chrono::milliseconds>(end - start)
@@ -409,7 +409,7 @@ void arrayinfo(int *arr, const int &size)
 // information
 {
   std::cout << "\n\n" << size << " elements" << std::endl;
-  std::cout << "And the last element is: " << arr[size - 1] << std::endl;
+  std::cout << "And the last element is: " << arr[size] << std::endl;
 
   for (int i = 0; i < size; i++) 
   {

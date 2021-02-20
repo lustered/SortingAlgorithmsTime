@@ -10,7 +10,7 @@
     Tested with fresh Microsoft Visual Studio install with C++ Support. 
     The executable files are located in the WindowsBin64 directory.
 
-#### To choose the algorithm, uncomment the lines 166-171. A single algorithm was tested each run.
+#### To choose the algorithm, uncomment the lines 167-172. A single algorithm was tested each run.
 
     /* selectionSort(uns_arrays[i], CHUNKSIZE[i]); */
     /* bubbleSort(uns_arrays[i], CHUNKSIZE[i]); */
@@ -21,7 +21,7 @@
 
 ## Verbose output of sorted arrays
 
-#### If you want verbose output of the arrays after being sorted, change the second param to true in line 136.
+#### If you want verbose output of the arrays after being sorted, change the second param to true in line 139.
 
 ##### Example
 
@@ -62,9 +62,6 @@
     Solid State Drive
     Intel i7-6700HQ CPU
 
-### Method used to create data.log using a bash script
-
-    ./run.sh >> data/data.log
 
 ### Creating and running executable  
 
