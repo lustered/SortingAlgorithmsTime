@@ -1,7 +1,14 @@
 ## Compilation and execution instructions
 
+### Linux
+
     g++ -std=c++11 -Wall Carlos_Luis_sorts.cpp
     ./a.out
+
+### Windows
+
+    Tested with fresh Microsoft Visual Studio install with C++ Support. 
+    The executable files are located in the WindowsBin64 directory.
 
 #### To choose the algorithm, uncomment the lines 166-171. A single algorithm was tested each run.
 
@@ -61,5 +68,11 @@
 
 ### Creating and running executable  
 
+### Linux
     g++ -std=c++11 -Wall Carlos_Luis_sorts.cpp -o Carlos_Luis_sorts.exe 
     ./Carlos_Luis_sorts.exe
+
+### Windows 
+
+    Build tab > build
+    Navigate to project directory -> Click executable
