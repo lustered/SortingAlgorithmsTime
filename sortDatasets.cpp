@@ -23,11 +23,11 @@ void createArraysFromDatasets();
 void calculateTime(int *uns_arrays, bool print);
 
 /* Fixed sizes for every dataset */
-/* const int CHUNKSIZE[] { 1000,  4000,   8000,   10000,  40000, 80000, 100000,
- */
-/*                         400000, 800000, 1000000 }; */
-const int CHUNKSIZE[]{400000,  1000000, 2000000, 3000000, 4000000,  5000000,
-                      6000000, 7000000, 8000000, 9000000, 10000000, 20000000};
+ const int CHUNKSIZE[] { 1000,  4000,   8000,   10000,  40000, 80000, 100000,
+                        400000, 800000, 1000000 };
+
+/* const int CHUNKSIZE[]{400000,  1000000, 2000000, 3000000, 4000000,  5000000, */
+/*                       6000000, 7000000, 8000000, 9000000, 10000000, 20000000}; */
 
 /* const int CHUNKSIZE[]{20000000}; */
 
@@ -62,7 +62,7 @@ void generateDatasets()
     outfile.close();
   }
 
-  std::cout << "Datasets generated" << std::endl;
+  std::cout << "Datasets generated\n";
 } // End generateDatasets
 
 void createArraysFromDatasets()
@@ -103,9 +103,9 @@ void createArraysFromDatasets()
     infile.close();
   } // End for
 
-  std::cout << "\nArrays populated" << std::endl;
+  std::cout << "\nArrays populated\n";
 
-  /* std::cout << "\n\nRun: " << tmp + 1 << std::endl; */
+  /* std::cout << "\n\nRun: " << tmp + 1 << "\n"; */
   calculateTime(*uns_arrays, false);
 
   /* free up memory */
@@ -151,14 +151,14 @@ void calculateTime(int *uns_arrays, bool print)
     /* Stop measuring time */
     auto end = std::chrono::system_clock::now();
 
-    if (print == true)
+    /* if (print == true) */
       arrayinfo(&uns_arrays[i], CHUNKSIZE[i]);
 
     auto ms = std::chrono::duration_cast<std::chrono::milliseconds>(end - start)
                   .count();
 
-    std::cout << "Runtime: " << ms << " ms for " << CHUNKSIZE[i] << " elements"
-              << std::endl;
+    std::cout << "\n\nRuntime: " << ms << " ms for " << CHUNKSIZE[i] << " elements\n";
+              
   } // End for
 } // End calculateTime
 
@@ -173,6 +173,6 @@ int pcopy(const int *arr, int beg, int end) {
 
 /* TODO */
 /* merge arrays of pointers */ 
-int pmerge(const int arr, int* arr, int &size1, int &size2) {
+/* int pmerge(const int arr, int* arr, int &size1, int &size2) { */
 
-}
+/* } */

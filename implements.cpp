@@ -6,6 +6,7 @@
 #include "algorithms/selection_sort.h"
 #include "algorithms/utils.h"
 #include <iostream>
+#include <string>
 
 void bubbleSort(int *arr, const int &size) 
 // Sorts an array using bubble sort
@@ -230,11 +231,9 @@ void arrayinfo(int *arr, const int &size)
 // Prints all the elements in an array within the defined size as well as other
 // information
 {
-  std::cout << "\n\n" << size << " elements" << std::endl;
-  std::cout << "And the last element is: " << arr[size - 1] << std::endl;
+  std::cout << "\n\n" << size << " elements\n";
+  std::cout << "And the last element is: " << arr[size - 1] << "\n";
 
   for (int i = 0; i < size; i++) 
-  {
     std::cout << arr[i] << " ";
-  }
 }
