@@ -23,11 +23,11 @@ void calculateTime(unsigned int *uns_arrays, bool print);
 const int CHUNKSIZE[]{400000,  1000000, 2000000, 3000000, 4000000,  5000000,
                       6000000, 7000000, 8000000, 9000000, 10000000, 20000000};
 
-
 /* Amount of datasets */
 const int chunkslen = sizeof(CHUNKSIZE) / sizeof(CHUNKSIZE[0]);
 
 int main() {
+
   generateDatasets();
   createArraysFromDatasets();
 

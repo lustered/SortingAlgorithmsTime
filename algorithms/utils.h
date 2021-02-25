@@ -7,4 +7,5 @@
 #include <vector>
 void arrayinfo(unsigned int *arr, const int &size);
 void calculateTime(unsigned int* arr, bool print = false);
+bool datasetsExist(const int* datasetSizes, const unsigned int &size);
 #endif

@@ -1,3 +1,4 @@
+#include <fstream>
 #include "algorithms/bubble_sort.h"
 #include "algorithms/heap_sort.h"
 #include "algorithms/insertion_sort.h"
@@ -45,7 +46,7 @@ void selectionSort(unsigned int *arr, const int &size)
 int partition(unsigned int *arr, const int &lo, const int &hi) 
 // Helper function for the quickSort algorithm
 {
-  int pivot = arr[lo];
+  unsigned int pivot = arr[lo];
   int i = lo;
 
   for (int j = lo + 1; j < hi; j++)
@@ -207,7 +208,7 @@ void mergeSort(unsigned int *arr, const int &l, const int &r, const int &size)
 void insertionSort(unsigned int *arr, const int &size) 
 // Sorts an array using insertion sort
 {
-  int low, j;
+  unsigned int low, j;
 
   /* Iterate from the second to last element */
   for (int i = 1; i < size; ++i) 
@@ -227,6 +228,20 @@ void insertionSort(unsigned int *arr, const int &size)
   /* arrayinfo(arr, size); */
 } // End insertionSort
 
+bool datasetsExist(const int* datasetSizes, const unsigned int &size){
+  bool ret = true;
+
+  for(unsigned int i = 0; i < size; ++i){
+    std::ifstream infile(std::to_string(datasetSizes[i]) + "_dataset.txt");
+    if(!infile.good())
+      return false;
+    infile.close();
+  }
+
+  std::cout << "Datasets already exist\n";
+  return ret;
+
+}
 void arrayinfo(unsigned int *arr, const int &size) 
 // Prints all the elements in an array within the defined size as well as other
 // information
