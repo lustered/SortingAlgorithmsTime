@@ -4,6 +4,6 @@
 */
 #ifndef MERGE_SORT_H
 #define MERGE_SORT_H
-void mergeSort(int *arr, const int &l, const int &r, const int &size);
-void merge(int *arr, const int &l, const int &m, const int &r, const int &size);
+void mergeSort(unsigned int *arr, const int &l, const int &r, const int &size);
+void merge(unsigned int *arr, const int &l, const int &m, const int &r, const int &size);
 #endif

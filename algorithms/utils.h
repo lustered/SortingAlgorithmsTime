@@ -5,6 +5,6 @@
 #ifndef UTILS_H
 #define UTILS_H
 #include <vector>
-void arrayinfo(int *arr, const int &size);
-void calculateTime(int* arr, bool print = false);
+void arrayinfo(unsigned int *arr, const int &size);
+void calculateTime(unsigned int* arr, bool print = false);
 #endif

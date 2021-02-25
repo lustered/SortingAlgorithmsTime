@@ -8,7 +8,7 @@
 #include <iostream>
 #include <string>
 
-void bubbleSort(int *arr, const int &size) 
+void bubbleSort(unsigned int *arr, const int &size) 
 // Sorts an array using bubble sort
 {
 
@@ -21,7 +21,7 @@ void bubbleSort(int *arr, const int &size)
   /* arrayinfo(arr, size); */
 } // End bubbleSort
 
-void selectionSort(int *arr, const int &size) 
+void selectionSort(unsigned int *arr, const int &size) 
 // Sorts an array using selecton sort
 {
   int min;
@@ -42,7 +42,7 @@ void selectionSort(int *arr, const int &size)
   } // End for
 } // End selectionSort
 
-int partition(int *arr, const int &lo, const int &hi) 
+int partition(unsigned int *arr, const int &lo, const int &hi) 
 // Helper function for the quickSort algorithm
 {
   int pivot = arr[lo];
@@ -59,7 +59,7 @@ int partition(int *arr, const int &lo, const int &hi)
   return i;
 } // End partition
 
-void quickSort(int *arr, const int &lo, const int &hi) 
+void quickSort(unsigned int *arr, const int &lo, const int &hi) 
 // Sorts an array using quick sort
 {
   int pivot;
@@ -78,7 +78,7 @@ void quickSort(int *arr, const int &lo, const int &hi)
   /* arrayinfo(arr, hi); */
 } // End quickSort
 
-void buildHeap(int *arr, const int &size, const int &lrg) 
+void buildHeap(unsigned int *arr, const int &size, const int &lrg) 
 // Helper function for heap sort
 {
   int tmplrg = lrg;
@@ -103,7 +103,7 @@ void buildHeap(int *arr, const int &size, const int &lrg)
   }
 } // End buildHeap
 
-void heapSort(int *arr, const int &size) 
+void heapSort(unsigned int *arr, const int &size) 
 // Sorts an array using heap sort
 {
   /* Build max heap */
@@ -123,7 +123,7 @@ void heapSort(int *arr, const int &size)
   /* arrayinfo(arr, size); */
 } // End heapSort
 
-void merge(int *arr, const int &l, const int &m, const int &r, const int &size) 
+void merge(unsigned int *arr, const int &l, const int &m, const int &r, const int &size) 
 // Implementation of the merge sort
 {
   int size1 = m - l + 1;
@@ -135,8 +135,8 @@ void merge(int *arr, const int &l, const int &m, const int &r, const int &size)
   /* int right[size2]; */
 
   /* Which we implement here */
-  int* left = new int[size1];
-  int* right = new int[size2];
+  unsigned int* left = new unsigned int[size1];
+  unsigned int* right = new unsigned int[size2];
 
   /* Populate the arrays */
   for (int i = 0; i < size1; i++)
@@ -185,7 +185,7 @@ void merge(int *arr, const int &l, const int &m, const int &r, const int &size)
 
 } //End merge 
 
-void mergeSort(int *arr, const int &l, const int &r, const int &size) 
+void mergeSort(unsigned int *arr, const int &l, const int &r, const int &size) 
 // Sorts an array using merge sort
 {
   if (l >= r) 
@@ -204,7 +204,7 @@ void mergeSort(int *arr, const int &l, const int &r, const int &size)
   merge(arr, l, m, r, size);
 } // End mergeSort
 
-void insertionSort(int *arr, const int &size) 
+void insertionSort(unsigned int *arr, const int &size) 
 // Sorts an array using insertion sort
 {
   int low, j;
@@ -227,7 +227,7 @@ void insertionSort(int *arr, const int &size)
   /* arrayinfo(arr, size); */
 } // End insertionSort
 
-void arrayinfo(int *arr, const int &size) 
+void arrayinfo(unsigned int *arr, const int &size) 
 // Prints all the elements in an array within the defined size as well as other
 // information
 {
