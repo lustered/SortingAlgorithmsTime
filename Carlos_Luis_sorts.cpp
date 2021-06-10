@@ -1,5 +1,5 @@
-/* Carlos Luis 
- * Assignment 1 - Sorting Algorithms 
+/* Carlos Luis
+ * Assignment 1 - Sorting Algorithms
  *
  * Contains implementation of:
  * bubbleSort, heapSort, mergeSort, quickSort, insertionSort, selectionSort
@@ -27,17 +27,16 @@
 
 void generateDatasets();
 void createArraysFromDatasets();
-void calculateTime(int* uns_arrays, bool print);
+void calculateTime(int *uns_arrays, bool print);
 
 /* Fixed sizes for every dataset */
-const int CHUNKSIZE[] { 1000,  4000,   8000,   10000,  40000, 80000, 100000,
-                        400000, 800000, 1000000 };
+const int CHUNKSIZE[]{1000,  4000,   8000,   10000,  40000,
+                      80000, 100000, 400000, 800000, 1000000};
 
 /* Amount of datasets */
 const int chunkslen = sizeof(CHUNKSIZE) / sizeof(CHUNKSIZE[0]);
 
-int main() 
-{
+int main() {
   generateDatasets();
   createArraysFromDatasets();
 
@@ -55,14 +54,13 @@ int main()
   return 0;
 } // End main
 
-void generateDatasets() 
+void generateDatasets()
 // Creates datasets files
 {
   srand(777);
 
   /* Iterate over the pre-defined sizes*/
-  for (size_t i = 0; i < chunkslen; i++) 
-  {
+  for (size_t i = 0; i < chunkslen; i++) {
 
     std::string chunk = "";
 
@@ -79,13 +77,12 @@ void generateDatasets()
   std::cout << "Datasets generated" << std::endl;
 } // End generateDatasets
 
-void createArraysFromDatasets() 
+void createArraysFromDatasets()
 // Creates and populates arrays using dataset files. Calls the calculateTime
 // three times
 {
 
-  for (size_t tmp = 0; tmp < 3; ++tmp) 
-  {
+  for (size_t tmp = 0; tmp < 3; ++tmp) {
     /* Notes:
      * This is an unsafe workaround allocating dynamic memory to store varying
      * size arrays. It'd be safer(ideally) to use std::vector<std::vector> or my
@@ -97,7 +94,7 @@ void createArraysFromDatasets()
 
     /* Create a vector of pointers to contain the arrays to sort*/
     /* std::vector<int *> uns_arrays = std::vector<int *>(); */
-    int** uns_arrays = new int*[chunkslen];
+    int **uns_arrays = new int *[chunkslen];
     /* uns_arrays.reserve(10); */
 
     /* Populate vector with arrays to sort with its correct size */
@@ -108,8 +105,7 @@ void createArraysFromDatasets()
     /* **************************************** */
 
     /* Iterate through every file */
-    for (size_t i = 0; i < chunkslen; ++i) 
-    {
+    for (size_t i = 0; i < chunkslen; ++i) {
 
       /* Read file with proper size/name */
       std::ifstream infile(std::to_string(CHUNKSIZE[i]) + "_dataset.txt");
@@ -120,8 +116,7 @@ void createArraysFromDatasets()
       int j = 0;
 
       /* Read line using comma as delimeter */
-      while (std::getline(infile, data, ',') && !infile.eof()) 
-      {
+      while (std::getline(infile, data, ',') && !infile.eof()) {
         std::stringstream ss(data);
 
         /* Insert the data */
@@ -141,19 +136,17 @@ void createArraysFromDatasets()
     /* free up memory */
     delete[] uns_arrays;
 
-  } // End of outer for 
+  } // End of outer for
 } // End createArraysFromDatasets
-
 
 /*          IMPLEMENTATION OF SORTS AND UTILITY FUNCTIONS */
 /************************************************************************/
 
-void calculateTime(int* uns_arrays, bool print) 
+void calculateTime(int *uns_arrays, bool print)
 // Sorts all of the datasets with a selected sort algorithm  and calculates time
 {
 
-  for (size_t i = 0; i < chunkslen; ++i) 
-  {
+  for (size_t i = 0; i < chunkslen; ++i) {
 
     /************************************************
      *                                              *
@@ -164,12 +157,12 @@ void calculateTime(int* uns_arrays, bool print)
     /* Start measuring time */
     auto start = std::chrono::system_clock::now();
 
-   // selectionSort(&uns_arrays[i], CHUNKSIZE[i]);
-   // bubbleSort(&uns_arrays[i], CHUNKSIZE[i]);
-   // insertionSort(&uns_arrays[i], CHUNKSIZE[i]);
-    mergeSort(&uns_arrays[i], 0, CHUNKSIZE[i] - 1, CHUNKSIZE[i]);
-   // quickSort(&uns_arrays[i], 0, CHUNKSIZE[i]);
-   // heapSort(&uns_arrays[i], CHUNKSIZE[i]);
+    /* selectionSort(&uns_arrays[i], CHUNKSIZE[i]); */
+    /* bubbleSort(&uns_arrays[i], CHUNKSIZE[i]); */
+    /* insertionSort(&uns_arrays[i], CHUNKSIZE[i]); */
+    /* mergeSort(&uns_arrays[i], 0, CHUNKSIZE[i] - 1, CHUNKSIZE[i]); */
+    /* quickSort(&uns_arrays[i], 0, CHUNKSIZE[i]); */
+    heapSort(&uns_arrays[i], CHUNKSIZE[i]);
 
     /* Stop measuring time */
     auto end = std::chrono::system_clock::now();
@@ -185,7 +178,7 @@ void calculateTime(int* uns_arrays, bool print)
   } // End for
 } // End calculateTime
 
-void bubbleSort(int *arr, const int &size) 
+void bubbleSort(int *arr, const int &size)
 // Sorts an array using bubble sort
 {
 
@@ -198,14 +191,13 @@ void bubbleSort(int *arr, const int &size)
   /* arrayinfo(arr, size); */
 } // End bubbleSort
 
-void selectionSort(int *arr, const int &size) 
+void selectionSort(int *arr, const int &size)
 // Sorts an array using selecton sort
 {
   int min;
 
   /* Iterate up until the second to last element */
-  for (int i = 0; i < size - 1; i++) 
-  {
+  for (int i = 0; i < size - 1; i++) {
 
     min = i;
 
@@ -219,15 +211,14 @@ void selectionSort(int *arr, const int &size)
   } // End for
 } // End selectionSort
 
-int partition(int *arr, const int &lo, const int &hi) 
+int partition(int *arr, const int &lo, const int &hi)
 // Helper function for the quickSort algorithm
 {
   int pivot = arr[lo];
   int i = lo;
 
   for (int j = lo + 1; j < hi; j++)
-    if (arr[j] <= pivot) 
-    {
+    if (arr[j] <= pivot) {
       i = i + 1;
       std::swap(arr[i], arr[j]);
     }
@@ -236,13 +227,12 @@ int partition(int *arr, const int &lo, const int &hi)
   return i;
 } // End partition
 
-void quickSort(int *arr, const int &lo, const int &hi) 
+void quickSort(int *arr, const int &lo, const int &hi)
 // Sorts an array using quick sort
 {
   int pivot;
 
-  if (lo < hi) 
-  {
+  if (lo < hi) {
     pivot = partition(arr, lo, hi);
 
     /* Sort left partition */
@@ -255,24 +245,23 @@ void quickSort(int *arr, const int &lo, const int &hi)
   /* arrayinfo(arr, hi); */
 } // End quickSort
 
-void buildHeap(int *arr, const int &size, const int &lrg) 
+void buildHeap(int *arr, const int &size, const int &lrg)
 // Helper function for heap sort
 {
   int tmplrg = lrg;
   int leftnode = 2 * lrg + 1;
   int rightnode = 2 * lrg + 2;
 
-  /* Check if the left node is bigger */ 
+  /* Check if the left node is bigger */
   if (leftnode < size && arr[leftnode] > arr[tmplrg])
     tmplrg = leftnode;
 
-  /* Check if the right node is bigger */ 
+  /* Check if the right node is bigger */
   if (rightnode < size && arr[rightnode] > arr[tmplrg])
     tmplrg = rightnode;
 
   /* If there is a new largest, set it as root node */
-  if (tmplrg != lrg) 
-  {
+  if (tmplrg != lrg) {
     std::swap(arr[lrg], arr[tmplrg]);
 
     /* call function recursively using the new largest */
@@ -280,7 +269,7 @@ void buildHeap(int *arr, const int &size, const int &lrg)
   }
 } // End buildHeap
 
-void heapSort(int *arr, const int &size) 
+void heapSort(int *arr, const int &size)
 // Sorts an array using heap sort
 {
   /* Build max heap */
@@ -288,8 +277,7 @@ void heapSort(int *arr, const int &size)
     buildHeap(arr, size, i);
 
   /* Heap sort */
-  for (int i = size - 1; i > 0; i--) 
-  {
+  for (int i = size - 1; i > 0; i--) {
 
     std::swap(arr[0], arr[i]);
 
@@ -300,7 +288,7 @@ void heapSort(int *arr, const int &size)
   /* arrayinfo(arr, size); */
 } // End heapSort
 
-void merge(int *arr, const int &l, const int &m, const int &r, const int &size) 
+void merge(int *arr, const int &l, const int &m, const int &r, const int &size)
 // Implementation of the merge sort
 {
   int size1 = m - l + 1;
@@ -312,8 +300,8 @@ void merge(int *arr, const int &l, const int &m, const int &r, const int &size)
   /* int right[size2]; */
 
   /* Which we implement here */
-  int* left = new int[size1];
-  int* right = new int[size2];
+  int *left = new int[size1];
+  int *right = new int[size2];
 
   /* Populate the arrays */
   for (int i = 0; i < size1; i++)
@@ -326,14 +314,11 @@ void merge(int *arr, const int &l, const int &m, const int &r, const int &size)
   int i = 0, j = 0;
   int k = l;
 
-  while (i < size1 && j < size2) 
-  {
-    if (left[i] <= right[j]) 
-    {
+  while (i < size1 && j < size2) {
+    if (left[i] <= right[j]) {
       arr[k] = left[i];
       i++;
-    } else 
-    {
+    } else {
       arr[k] = right[j];
       j++;
     }
@@ -341,15 +326,13 @@ void merge(int *arr, const int &l, const int &m, const int &r, const int &size)
   }
 
   /* Move the elements left from both tmp arrays back */
-  while (i < size1) 
-  {
+  while (i < size1) {
     arr[k] = left[i];
     i++;
     k++;
   }
 
-  while (j < size2) 
-  {
+  while (j < size2) {
     arr[k] = right[j];
     j++;
     k++;
@@ -360,13 +343,12 @@ void merge(int *arr, const int &l, const int &m, const int &r, const int &size)
 
   /* arrayinfo(arr, size); */
 
-} //End merge 
+} // End merge
 
-void mergeSort(int *arr, const int &l, const int &r, const int &size) 
+void mergeSort(int *arr, const int &l, const int &r, const int &size)
 // Sorts an array using merge sort
 {
-  if (l >= r) 
-  {
+  if (l >= r) {
     return;
   }
 
@@ -381,20 +363,18 @@ void mergeSort(int *arr, const int &l, const int &r, const int &size)
   merge(arr, l, m, r, size);
 } // End mergeSort
 
-void insertionSort(int *arr, const int &size) 
+void insertionSort(int *arr, const int &size)
 // Sorts an array using insertion sort
 {
   int low, j;
 
   /* Iterate from the second to last element */
-  for (int i = 1; i < size; ++i) 
-  {
+  for (int i = 1; i < size; ++i) {
     low = arr[i];
     j = i - 1;
 
     /* Push elements if they're greater than curr key*/
-    while (j >= 0 && arr[j] > low) 
-    {
+    while (j >= 0 && arr[j] > low) {
       arr[j + 1] = arr[j];
       j = j - 1;
     }
@@ -404,15 +384,14 @@ void insertionSort(int *arr, const int &size)
   /* arrayinfo(arr, size); */
 } // End insertionSort
 
-void arrayinfo(int *arr, const int &size) 
+void arrayinfo(int *arr, const int &size)
 // Prints all the elements in an array within the defined size as well as other
 // information
 {
   std::cout << "\n\n" << size << " elements" << std::endl;
   std::cout << "And the last element is: " << arr[size - 1] << std::endl;
 
-  for (int i = 0; i < size; i++) 
-  {
+  for (int i = 0; i < size; i++) {
     std::cout << arr[i] << " ";
   }
 }
